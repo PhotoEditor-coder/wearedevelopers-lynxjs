@@ -2,10 +2,11 @@ import './MainPage.css';
 
 import { useSyncExternalStore } from '@lynx-js/react';
 
+import { Bucket } from '../components/Bucket.js';
 import { Button } from '../components/Button.js';
 import { ListBox } from '../components/ListBox.js';
 import type { AppModel } from '../model/AppModel.js';
-import type { RemarkModel } from '../model/RemarkModel.js';
+import type { BucketId, RemarkModel } from '../model/RemarkModel.js';
 
 export function MainPage(props: { appModel: AppModel }) {
   const appModel = props.appModel;
@@ -16,10 +17,39 @@ export function MainPage(props: { appModel: AppModel }) {
     () => appModel.generation
   );
 
+  const selectedBucketId: BucketId = appModel.selectedBucketId;
   const selectedItem: RemarkModel | undefined = appModel.selectedItem;
+
+  function clickBucket(bucketId: BucketId): void {
+    appModel.selectedBucketId = bucketId;
+  }
 
   return (
     <view className="mainPage">
+      <view
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          gap: '20px'
+        }}
+      >
+        <Bucket
+          bucketId="not-ready"
+          highlightedBucketId={selectedBucketId}
+          label="NOT READY"
+          onClick={clickBucket}
+          appModel={props.appModel}
+        />
+        <Bucket
+          bucketId="ready"
+          highlightedBucketId={selectedBucketId}
+          label="READY"
+          onClick={clickBucket}
+          appModel={props.appModel}
+        />
+      </view>
+
       <ListBox
         items={appModel.listItems()}
         selectedItem={selectedItem}
