@@ -1,3 +1,4 @@
+/// <reference path="./typings.d.ts" />
 import { root } from '@lynx-js/react';
 
 import { App } from './App.js';
