@@ -36,7 +36,15 @@ export function MainPage(props: { appModel: AppModel }) {
         <Button
           text={'New\u2026'}
           onClick={() => {
-            console.log('Clicked button!');
+            let counter: number = 1;
+            let title: string = `New remark`;
+            while (
+              Array.from(appModel.remarks).some((x) => x.title === title)
+            ) {
+              title = `New remark #${++counter}`;
+            }
+            const newRemark: RemarkModel = appModel.createRemark(title);
+            appModel.selectedItem = newRemark;
           }}
         />
       </view>
