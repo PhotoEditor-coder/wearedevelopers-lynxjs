@@ -98,7 +98,14 @@ export function EditPage(props: { remarkModel: RemarkModel }) {
           marginTop: '10px'
         }}
       >
-          <Button text={'Delete\u2026'} />
+        <Button
+          text={'Delete\u2026'}
+          onClick={() => {
+            remarkModel.bucketId = 'deleted';
+            appModel.deleteRemark(remarkModel);
+            navigate('/');
+          }}
+        />
         <Button
           text="Done"
           style={{ marginLeft: '10px' }}
