@@ -1,5 +1,6 @@
 import './MainPage.css';
 
+import { useState } from '@lynx-js/react';
 import { useSyncExternalStore } from '@lynx-js/react';
 
 import { Bucket } from '../components/Bucket.js';
@@ -20,9 +21,48 @@ export function MainPage(props: { appModel: AppModel }) {
   const selectedBucketId: BucketId = appModel.selectedBucketId;
   const selectedItem: RemarkModel | undefined = appModel.selectedItem;
 
+  const [moving, setMoving] = useState(false);
+
   function clickBucket(bucketId: BucketId): void {
-    appModel.selectedBucketId = bucketId;
+    if (!moving) {
+      // Normal behavior; select the clicked bucket
+      appModel.selectedBucketId = bucketId;
+    } else {
+      // The "move" button was clicked, sp move the current item to the clicked bucket
+      if (selectedItem) {
+        selectedItem.bucketId = bucketId;
+      }
+      setMoving(false);
+    }
   }
+
+  const bottomPane: JSX.Element = moving ? (
+    <view className="movingNotice">
+      <text style={{ fontSize: '20px' }}>Select a bucket for this item.</text>
+      <Button
+        text="Cancel"
+        onClick={() => {
+          setMoving(false);
+        }}
+      />
+    </view>
+  ) : (
+    <ListBox
+      items={appModel.listBucket(selectedBucketId)}
+      selectedItem={selectedItem}
+      onSelectItem={(listItem) => {
+        appModel.selectedItem = listItem;
+      }}
+      onEditItem={() => {}}
+      onMoveItem={() => {
+        setMoving(true);
+      }}
+    />
+  );
+
+  const highlightedBucketId: BucketId | undefined = moving
+    ? undefined
+    : selectedBucketId;
 
   return (
     <view className="mainPage">
@@ -34,7 +74,7 @@ export function MainPage(props: { appModel: AppModel }) {
       >
         <Bucket
           bucketId="archived"
-          highlightedBucketId={selectedBucketId}
+          highlightedBucketId={highlightedBucketId}
           label="ARCHIVED"
           onClick={clickBucket}
           appModel={appModel}
@@ -65,15 +105,8 @@ export function MainPage(props: { appModel: AppModel }) {
         />
       </view>
 
-      <ListBox
-        items={appModel.listBucket(selectedBucketId)}
-        selectedItem={selectedItem}
-        onSelectItem={(listItem) => {
-          appModel.selectedItem = listItem;
-        }}
-        onEditItem={() => {}}
-        onMoveItem={() => {}}
-      />
+      {bottomPane}
+
       <view
         style={{
           linearDirection: 'row',
