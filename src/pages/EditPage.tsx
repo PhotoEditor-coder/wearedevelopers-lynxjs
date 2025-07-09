@@ -1,5 +1,6 @@
 import './EditPage.css';
 
+import { useNavigate } from 'react-router';
 import {
   type RefObject,
   useEffect,
@@ -18,6 +19,7 @@ import { Button } from '../components/Button.js';
 import type { RemarkModel } from '../model/RemarkModel.js';
 
 export function EditPage(props: { remarkModel: RemarkModel }) {
+  const navigate = useNavigate();
   const remarkModel = props.remarkModel;
   const appModel = remarkModel.appModel;
 
@@ -96,8 +98,12 @@ export function EditPage(props: { remarkModel: RemarkModel }) {
           marginTop: '10px'
         }}
       >
-        <Button text={'Delete\u2026'} />
-        <Button text="Done" style={{ marginLeft: '10px' }} />
+          <Button text={'Delete\u2026'} />
+        <Button
+          text="Done"
+          style={{ marginLeft: '10px' }}
+          onClick={() => navigate('/')}
+        />
       </view>
     </view>
   );

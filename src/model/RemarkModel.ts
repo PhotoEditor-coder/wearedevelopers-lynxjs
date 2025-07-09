@@ -3,6 +3,8 @@ import type { AppModel } from './AppModel.js';
 export type BucketId = 'ready' | 'not-ready' | 'archived' | 'deleted' | number;
 
 export class RemarkModel {
+  static #nextRemarkId: number = 100;
+
   public readonly appModel: AppModel;
 
   #generation: number = 0;
@@ -11,6 +13,7 @@ export class RemarkModel {
   #details: string = '';
   #bucketId: BucketId = 'not-ready';
  
+  public readonly remarkId: number = RemarkModel.#nextRemarkId++;
 
   public constructor(appModel: AppModel) {
     this.appModel = appModel;

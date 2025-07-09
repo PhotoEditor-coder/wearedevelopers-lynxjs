@@ -1,5 +1,6 @@
 import './MainPage.css';
 
+import { useNavigate } from 'react-router';
 import { useState } from '@lynx-js/react';
 import { useSyncExternalStore } from '@lynx-js/react';
 
@@ -10,6 +11,8 @@ import type { AppModel } from '../model/AppModel.js';
 import type { BucketId, RemarkModel } from '../model/RemarkModel.js';
 
 export function MainPage(props: { appModel: AppModel }) {
+  const navigate = useNavigate();
+
   const appModel = props.appModel;
 
   useSyncExternalStore(
@@ -53,7 +56,9 @@ export function MainPage(props: { appModel: AppModel }) {
       onSelectItem={(listItem) => {
         appModel.selectedItem = listItem;
       }}
-      onEditItem={() => {}}
+      onEditItem={(listItem) => {
+        navigate(`/edit/${listItem.remarkId}`);
+      }}
       onMoveItem={() => {
         setMoving(true);
       }}
