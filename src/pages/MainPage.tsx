@@ -26,6 +26,21 @@ export function MainPage(props: { appModel: AppModel }) {
 
   return (
     <view className="mainPage">
+          <view
+        style={{
+          linearDirection: 'row',
+          justifyContent: 'end'
+        }}
+      >
+        <Bucket
+          bucketId="archived"
+          highlightedBucketId={selectedBucketId}
+          label="ARCHIVED"
+          onClick={clickBucket}
+          appModel={appModel}
+        />
+      </view>
+
       <view
         style={{
           display: 'flex',
