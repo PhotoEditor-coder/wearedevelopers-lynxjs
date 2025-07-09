@@ -10,4 +10,4 @@ declare module '@lynx-js/types' {
 }
 
 // This export makes the file a module
-export {}
+export {};
