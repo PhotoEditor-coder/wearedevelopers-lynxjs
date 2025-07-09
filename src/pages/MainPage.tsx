@@ -43,8 +43,12 @@ export function MainPage(props: { appModel: AppModel }) {
             ) {
               title = `New remark #${++counter}`;
             }
-            const newRemark: RemarkModel = appModel.createRemark(title);
+            const newRemark: RemarkModel = appModel.createRemark(
+              'not-ready',
+              title
+            );
             appModel.selectedItem = newRemark;
+            appModel.selectedBucketId = newRemark.bucketId;
           }}
         />
       </view>
