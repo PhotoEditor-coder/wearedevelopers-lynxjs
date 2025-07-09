@@ -1,3 +1,5 @@
+import { RemarkModel } from './RemarkModel.js';
+
 export type Action = () => void;
 
 export class ModelWithSubscribe {
@@ -39,4 +41,61 @@ export class ModelWithSubscribe {
       listener();
     }
   };
+}
+
+export class AppModel extends ModelWithSubscribe {
+  #remarks: Set<RemarkModel> = new Set();
+  #selectedItem: RemarkModel | undefined = undefined;
+
+  #generation: number = 0;
+
+  protected override onChanged(): void {
+    ++this.#generation;
+  }
+
+  public get remarks(): ReadonlySet<RemarkModel> {
+    return this.#remarks;
+  }
+
+  /**
+   * Used for change detection; incremented whenever this object or any
+   * of its children has changed in any way.
+   */
+  public get generation(): number {
+    return this.#generation;
+  }
+
+  public get selectedItem(): RemarkModel | undefined {
+    return this.#selectedItem;
+  }
+  public set selectedItem(value: RemarkModel | undefined) {
+    this.#selectedItem = value;
+    this.notifyChanged();
+  }
+
+  public addRemark(remark: RemarkModel): void {
+    if (remark.appModel !== this) {
+      throw new Error('Wrong model');
+    }
+    this.#remarks.add(remark);
+    this.notifyChanged();
+  }
+
+  public createRemark(title: string, details?: string): RemarkModel {
+    const remark: RemarkModel = new RemarkModel(this);
+    remark.title = title;
+    remark.details = details ?? '';
+    this.addRemark(remark);
+    return remark;
+  }
+
+  public deleteRemark(remark: RemarkModel): void {
+    this.#remarks.delete(remark);
+    this.notifyChanged();
+  }
+
+  public listItems(): readonly RemarkModel[] {
+    let list: RemarkModel[] | undefined = Array.from(this.#remarks);
+    return list;
+  }
 }
