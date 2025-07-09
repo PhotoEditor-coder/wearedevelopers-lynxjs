@@ -9,13 +9,14 @@
     "preview": "rspeedy preview"
   },
   "dependencies": {
-    "@lynx-js/react": "^0.111.0"
+    "@lynx-js/react": "^0.111.0",
+    "react-router": "^6.30.1"
   },
   "devDependencies": {
     "@lynx-js/qrcode-rsbuild-plugin": "^0.4.0",
     "@lynx-js/react-rsbuild-plugin": "^0.10.6",
     "@lynx-js/rspeedy": "^0.10.0",
-    "@lynx-js/types": "3.3.0",
+    "@lynx-js/types": "3.3.1",
     "@rsbuild/plugin-type-check": "1.2.3",
     "@types/react": "^18.3.23",
     "prettier": "^3.5.3",
@@ -24,5 +25,6 @@
   "engines": {
     "node": ">=18"
   },
-  "private": true
+  "private": true,
+  "packageManager": "pnpm@9.15.9"
 }
