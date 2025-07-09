@@ -11,7 +11,12 @@ export function MainPage() {
           justifyContent: 'end'
         }}
       >
-        <Button text={'New\u2026'} />
+        <Button
+          text={'New\u2026'}
+          onClick={() => {
+            console.log('Clicked button!');
+          }}
+        />
       </view>
     </view>
   );

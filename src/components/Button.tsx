@@ -6,6 +6,7 @@ import type { CSSProperties } from '@lynx-js/types';
 export interface ButtonProps {
   text: string;
   style?: string | CSSProperties;
+  onClick?: () => void;
 }
 
 export function Button(props: ButtonProps): JSX.Element {
@@ -19,6 +20,7 @@ export function Button(props: ButtonProps): JSX.Element {
     <view
       className={isActive ? 'buttonViewTouched' : 'buttonView'}
       style={props.style}
+      bindtap={props.onClick}
       bindtouchstart={() => setActive(true)}
       bindtouchend={onTouchEnd}
       bindtouchcancel={onTouchEnd}
