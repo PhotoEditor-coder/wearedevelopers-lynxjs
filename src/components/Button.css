@@ -1,9 +1,9 @@
 .buttonView {
-  border-color: #7aa2bd;
+  border-color: var(--color-blue-dark);
   border-style: solid;
   border-width: 2px;
   border-radius: 8px;
-  background-color: #aac4d5;
+  background-color: var(--color-blue-lite);
 
   padding-top: 5px;
   padding-bottom: 5px;
@@ -13,6 +13,6 @@
 
 .buttonText {
   font-weight: bold;
-  color: #ffffff;
+  color: var(--color-white);
   font-size: 20px;
 }
