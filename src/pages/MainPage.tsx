@@ -6,6 +6,7 @@ import { useSyncExternalStore } from '@lynx-js/react';
 
 import { Bucket } from '../components/Bucket.js';
 import { Button } from '../components/Button.js';
+import { Calendar } from '../components/Calendar.js';
 import { ListBox } from '../components/ListBox.js';
 import type { AppModel } from '../model/AppModel.js';
 import type { BucketId, RemarkModel } from '../model/RemarkModel.js';
@@ -85,6 +86,13 @@ export function MainPage(props: { appModel: AppModel }) {
           appModel={appModel}
         />
       </view>
+
+      <Calendar
+        appModel={props.appModel}
+        highlightedBucketId={highlightedBucketId}
+        currentDay={4}
+        onClickBucket={clickBucket}
+      />
 
       <view
         style={{
