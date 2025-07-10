@@ -26,7 +26,7 @@ export function MainPage(props: { appModel: AppModel }) {
 
   return (
     <view className="mainPage">
-          <view
+      <view
         style={{
           linearDirection: 'row',
           justifyContent: 'end'
@@ -71,6 +71,8 @@ export function MainPage(props: { appModel: AppModel }) {
         onSelectItem={(listItem) => {
           appModel.selectedItem = listItem;
         }}
+        onEditItem={() => {}}
+        onMoveItem={() => {}}
       />
       <view
         style={{
