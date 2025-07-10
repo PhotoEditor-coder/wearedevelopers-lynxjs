@@ -1,0 +1,30 @@
+.listbox {
+  width: 100%;
+  background-color: var(--color-white);
+}
+
+.listboxRow {
+  width: 100%;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  border-style: none;
+  border-bottom-style: solid;
+
+  border-color: var(--color-border-gray);
+  border-width: 2px;
+}
+
+.listboxSelectedRow {
+  background-color: var(--color-yellow);
+}
+
+.listboxText {
+  font-size: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
