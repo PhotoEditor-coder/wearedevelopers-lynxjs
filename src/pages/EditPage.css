@@ -1,0 +1,15 @@
+.editPage {
+  display: linear;
+  background-color: var(--color-back-sky);
+  height: 100%;
+  padding-top: 70px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.editPageHeading {
+  font-size: 30px;
+  padding-top: 30px;
+  padding-bottom: 5px;
+  padding-left: 3px;
+}
