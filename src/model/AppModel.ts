@@ -1,4 +1,4 @@
-import { RemarkModel } from './RemarkModel.js';
+import { type BucketId, RemarkModel } from './RemarkModel.js';
 
 export type Action = () => void;
 
@@ -45,6 +45,7 @@ export class ModelWithSubscribe {
 
 export class AppModel extends ModelWithSubscribe {
   #remarks: Set<RemarkModel> = new Set();
+  #selectedBucketId: BucketId = 'not-ready';
   #selectedItem: RemarkModel | undefined = undefined;
 
   #generation: number = 0;
@@ -65,6 +66,14 @@ export class AppModel extends ModelWithSubscribe {
     return this.#generation;
   }
 
+  public get selectedBucketId(): BucketId {
+    return this.#selectedBucketId;
+  }
+  public set selectedBucketId(value: BucketId) {
+    this.#selectedBucketId = value;
+    this.notifyChanged();
+  }
+
   public get selectedItem(): RemarkModel | undefined {
     return this.#selectedItem;
   }
@@ -81,8 +90,13 @@ export class AppModel extends ModelWithSubscribe {
     this.notifyChanged();
   }
 
-  public createRemark(title: string, details?: string): RemarkModel {
+  public createRemark(
+    bucketId: BucketId,
+    title: string,
+    details?: string
+  ): RemarkModel {
     const remark: RemarkModel = new RemarkModel(this);
+    remark.bucketId = bucketId;
     remark.title = title;
     remark.details = details ?? '';
     this.addRemark(remark);

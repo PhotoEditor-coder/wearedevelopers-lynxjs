@@ -1,5 +1,7 @@
 import type { AppModel } from './AppModel.js';
 
+export type BucketId = 'ready' | 'not-ready' | 'archived' | 'deleted' | number;
+
 export class RemarkModel {
   public readonly appModel: AppModel;
 
@@ -7,6 +9,8 @@ export class RemarkModel {
 
   #title: string = 'Untitled';
   #details: string = '';
+  #bucketId: BucketId = 'not-ready';
+ 
 
   public constructor(appModel: AppModel) {
     this.appModel = appModel;
@@ -37,6 +41,17 @@ export class RemarkModel {
   public set details(value: string) {
     if (this.#details !== value) {
       this.#details = value;
+      ++this.#generation;
+      this.appModel.notifyChanged();
+    }
+  }
+
+  public get bucketId(): BucketId {
+    return this.#bucketId;
+  }
+  public set bucketId(value: BucketId) {
+    if (this.#bucketId !== value) {
+      this.#bucketId = value;
       ++this.#generation;
       this.appModel.notifyChanged();
     }
