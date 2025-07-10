@@ -122,4 +122,14 @@ export class AppModel extends ModelWithSubscribe {
 
     return list;
   }
+
+  public findRemarkById(remarkId: number): RemarkModel | undefined {
+    // TODO: optimize
+    for (const remark of this.#remarks) {
+      if (remark.remarkId === remarkId) {
+        return remark;
+      }
+    }
+    return undefined;
+  }
 }
