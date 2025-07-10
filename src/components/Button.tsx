@@ -1,5 +1,6 @@
 import './Button.css';
 
+import { useState } from '@lynx-js/react';
 import type { CSSProperties } from '@lynx-js/types';
 
 export interface ButtonProps {
@@ -8,8 +9,20 @@ export interface ButtonProps {
 }
 
 export function Button(props: ButtonProps): JSX.Element {
+  const [isActive, setActive] = useState<boolean>(false);
+
+  function onTouchEnd(): void {
+    setActive(false);
+  }
+
   return (
-    <view className={'buttonView'} style={props.style}>
+    <view
+      className={isActive ? 'buttonViewTouched' : 'buttonView'}
+      style={props.style}
+      bindtouchstart={() => setActive(true)}
+      bindtouchend={onTouchEnd}
+      bindtouchcancel={onTouchEnd}
+    >
       <text className="buttonText">{props.text}</text>
     </view>
   );
