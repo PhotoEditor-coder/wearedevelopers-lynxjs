@@ -1,5 +1,14 @@
 .listbox {
   width: 100%;
+
+  border-color: var(--color-border-gray);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 8px;
+
+  /* offset-x offset-y blur-radius color */
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+
   background-color: var(--color-white);
 }
 
