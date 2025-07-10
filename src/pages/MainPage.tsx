@@ -66,7 +66,7 @@ export function MainPage(props: { appModel: AppModel }) {
       </view>
 
       <ListBox
-        items={appModel.listItems()}
+        items={appModel.listBucket(selectedBucketId)}
         selectedItem={selectedItem}
         onSelectItem={(listItem) => {
           appModel.selectedItem = listItem;

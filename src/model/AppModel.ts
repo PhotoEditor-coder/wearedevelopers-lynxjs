@@ -48,9 +48,13 @@ export class AppModel extends ModelWithSubscribe {
   #selectedBucketId: BucketId = 'not-ready';
   #selectedItem: RemarkModel | undefined = undefined;
 
+  // Cache
+  #remarksByBucketId: Map<BucketId, RemarkModel[]> = new Map();
+
   #generation: number = 0;
 
   protected override onChanged(): void {
+    this.#remarksByBucketId.clear(); // clear the cache
     ++this.#generation;
   }
 
@@ -108,8 +112,14 @@ export class AppModel extends ModelWithSubscribe {
     this.notifyChanged();
   }
 
-  public listItems(): readonly RemarkModel[] {
-    let list: RemarkModel[] | undefined = Array.from(this.#remarks);
+  public listBucket(bucketId: BucketId): readonly RemarkModel[] {
+    let list: RemarkModel[] | undefined = this.#remarksByBucketId.get(bucketId);
+
+    if (list === undefined) {
+      list = Array.from(this.#remarks).filter((x) => x.bucketId === bucketId);
+      this.#remarksByBucketId.set(bucketId, list);
+    }
+
     return list;
   }
 }
