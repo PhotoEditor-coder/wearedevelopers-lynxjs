@@ -1,29 +1,21 @@
 import './ListBox.css';
 
-import { useState } from '@lynx-js/react';
+import type { RemarkModel } from '../model/RemarkModel.js';
 
-interface MockItem {
-  title: string;
+export interface ListBoxProps {
+  items: readonly RemarkModel[];
+  selectedItem?: RemarkModel;
+  onSelectItem: (listItem: RemarkModel) => void;
 }
 
-const items = [
-  { title: "What's coming in Q3" },
-  { title: 'Rust+JS' },
-  { title: 'Share about the meetup' }
-];
-
-export function ListBox(): JSX.Element {
-  const [selectedItem, setSelectedItem] = useState<MockItem | undefined>(
-    undefined
-  );
-
+export function ListBox(props: ListBoxProps): JSX.Element {
   const rows: JSX.Element[] = [];
 
   let index: number = 0;
-  for (const item of items) {
+  for (const item of props.items) {
     const classNames: string[] = ['listboxRow'];
 
-    if (selectedItem === item) {
+    if (props.selectedItem === item) {
       classNames.push('listboxSelectedRow');
     }
 
@@ -31,7 +23,7 @@ export function ListBox(): JSX.Element {
       <view
         key={index}
         className={classNames.join(' ')}
-        bindtap={() => setSelectedItem(item)}
+        bindtap={() => props.onSelectItem(item)}
       >
         <text className="listboxText">{item.title}</text>
       </view>
