@@ -1,0 +1,18 @@
+.buttonView {
+  border-color: #7aa2bd;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 8px;
+  background-color: #aac4d5;
+
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.buttonText {
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 20px;
+}

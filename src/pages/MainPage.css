@@ -1,0 +1,15 @@
+.mainPage {
+  display: grid;
+  height: 100%;
+
+  grid-template-rows: max-content;
+  grid-template-columns: 1fr;
+
+  background-color: #e3f4ff;
+
+  padding-left: 15px;
+  padding-right: 15px;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
