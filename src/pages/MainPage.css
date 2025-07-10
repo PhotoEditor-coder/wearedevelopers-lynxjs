@@ -15,3 +15,14 @@
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+.movingNotice {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  width: 100%;
+}
